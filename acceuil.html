@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma page d'accueil</title>
+  <!-- Lien vers le fichier Bootstrap CSS -->
+   <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <!-- Lien vers le fichier CSS personnalisé -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Liste des étudiants</h1>
+    <!-- Formulaire d'ajout d'un étudiant -->
+    <form id="add-student-form">
+      <div class="mb-3">
+        <label for="name-input" class="form-label">Nom de l'étudiant</label>
+        <input type="text" class="form-control" id="name-input" required>
+      </div>
+      <div class="mb-3">
+        <label for="note-input" class="form-label">Note de l'étudiant</label>
+        <input type="number" class="form-control" id="note-input" min="0" max="20" required>
+      </div>
+      <div class="mb-3">
+        <label for="email-input" class="form-label">Email de l'étudiant</label>
+        <input type="email" class="form-control" id="email-input" required>
+      </div>
+      <div class="mb-3">
+        <label for="phone-input" class="form-label">Téléphone de l'étudiant</label>
+        <input type="tel" class="form-control" id="phone-input" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+    <!-- Tableau des étudiants -->
+    <table id="student-table" class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Note</th>
+          <th scope="col">Email</th>
+          <th scope="col">Téléphone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Les entrées du tableau seront ajoutées ici par JavaScript -->
+      </tbody>
+    </table>
+  </div>
+  <!-- Lien vers le fichier Bootstrap JS -->
+ <script>
+// Récupération des éléments HTML pertinents
+const addStudentForm = document.getElementById('add-student-form');
+const studentTableBody = document.querySelector('#student-table tbody');
+
+// Fonction d'ajout d'un étudiant
+function addStudent(event) {
+  // Empêcher l'envoi du formulaire (pour éviter que la page ne se recharge)
+  event.preventDefault();
+
+  // Récupération des données du formulaire
+  const nameInput = document.getElementById('name-input');
+  const noteInput = document.getElementById('note-input');
+  const emailInput = document.getElementById('email-input');
+  const phoneInput = document.getElementById('phone-input');
+
+  // Création d'une nouvelle entrée de tableau
+  const newRow = document.createElement('tr');
+  newRow.innerHTML = `
+    <td>${nameInput.value}</td>
+    <td>${noteInput.value}</td>
+    <td>${emailInput.value}</td>
+    <td>${phoneInput.value}</td>
+  `;
+  studentTableBody.appendChild(newRow);
+
+  // Effacement des champs du formulaire
+  nameInput.value = '';
+  noteInput.value = '';
+  emailInput.value = '';
+  phoneInput.value = '';
+}
+
+// Ajout d'un écouteur d'événement pour le formulaire
+addStudentForm.addEventListener('submit', addStudent);
+</script>
+</body>
+</html>
